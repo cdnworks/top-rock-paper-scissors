@@ -52,11 +52,18 @@ function playRound(computerChoice, playerChoice) {
     }
 }
 
+function game() {
+    //plays up to n rounds of rock paper scissors.
+    //by default, this is 5 rounds
+    for(let i = 0; i < 5; i++) {
+        let cpuChoice = getComputerChoice();
+        let playerChoice = getPlayerChoice();
+        let result = playRound(cpuChoice, playerChoice);
+        console.log(`You picked: ${playerChoice}, and the computer picked: ${cpuChoice}`);
+        console.log(result);
+    }
+}
 
 
-//game test
-
-let cpuChoice = getComputerChoice();
-let playerChoice = getPlayerChoice();
-let result = playRound(cpuChoice, playerChoice);
-console.log(result);
+//run game
+game();
