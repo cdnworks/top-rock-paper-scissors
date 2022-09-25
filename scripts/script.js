@@ -18,35 +18,45 @@ function getPlayerChoice() {
 }
 
 function playRound(computerChoice, playerChoice) {
-    //compare the player inputs to the computer's input
+    //compare user's inputs to the computer's input and return if they win, lose or tie
     if(computerChoice === playerChoice) {
         //tie game
+        return("You tied!");
     }
 
     if(computerChoice == 'rock') {
         if(playerChoice == 'paper') {
-            
+            return("You win!");
         }
         if(playerChoice == 'scissors') {
-            
+            return("You lose!");
         }
     }
 
     if(computerChoice == 'paper') {
         if(playerChoice == 'rock') {
-
+            return("You lose!");
         }
         if(playerChoice == 'scissors') {
-            
+            return("You win!");
         }
     }
 
     if(computerChoice == 'scissors') {
         if(playerChoice == 'rock') {
-
+            return("You win!");
         }
         if(playerChoice == 'paper') {
-            
+            return("You lose!");
         }
     }
 }
+
+
+
+//game test
+
+let cpuChoice = getComputerChoice();
+let playerChoice = getPlayerChoice();
+let result = playRound(cpuChoice, playerChoice);
+console.log(result);
