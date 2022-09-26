@@ -57,5 +57,16 @@ function game() {
 }
 
 
-//run game
-game();
+
+
+//collect information from the buttons
+const gameButtons = document.querySelectorAll('div.button-box button');
+
+//do thing for each button on click
+gameButtons.forEach((button) => {
+
+    button.addEventListener('click', function(e) {
+        console.log(e.target);
+    });
+
+});
