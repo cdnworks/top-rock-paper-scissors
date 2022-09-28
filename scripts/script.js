@@ -3,19 +3,21 @@ function getComputerChoice() {
     return choice[Math.floor(Math.random() * 3)] //returns the 0th, 1st or 2nd index
 }
 
-function getPlayerChoice() {
-    while(true) {
-        const input = prompt("Rock, Paper or Scissors?");
-        const choice = input.toLowerCase();
-        if(choice === 'rock' || choice === 'paper' || choice === 'scissors') {
-            //valid input, return
-            return choice;
-        }
-        else {
-            alert("invalid choice, type 'rock', 'paper', or 'scissors'");
-        }
-    }
-}
+
+// function getPlayerChoice() {
+//     while(true) {
+//         const input = prompt("Rock, Paper or Scissors?");
+//         const choice = input.toLowerCase();
+//         if(choice === 'rock' || choice === 'paper' || choice === 'scissors') {
+//             //valid input, return
+//             return choice;
+//         }
+//         else {
+//             alert("invalid choice, type 'rock', 'paper', or 'scissors'");
+//         }
+//     }
+// }
+
 
 function playRound(computerChoice, playerChoice) {
     //compare user's inputs to the computer's input and return if they win, lose or tie
@@ -52,17 +54,45 @@ function playRound(computerChoice, playerChoice) {
     }
 }
 
-function game() {
-    
+
+function writeGameStatus(computerChoice, playerChoice, gameResult) {
+    //take in strings for the computer and human players; report if the player won
+    //write all this info to the output div, class="results-box"
+
+    //get div where info will be written
+    const displayDiv = document.querySelector('.results-box');
+
+    //clear any previous results
+    clearResults();
+
+    const gameChoices = document.createElement('h3');
+    gameChoices.classList.add('game-choices');
+    gameChoices.textContent = `You picked: ${playerChoice}, and the Computer picked: ${computerChoice}...`
+
+    const gameResults = document.createElement('h1');
+    gameResults.classList.add('game-results');
+    gameResults.textContent = `${gameResult}`;
+
+    displayDiv.appendChild(gameChoices);
+    displayDiv.appendChild(gameResults);
 }
 
+function clearResults() {
+    //check if results from the game exist, and if they do; remove them
+    let gameChoices = document.querySelector('.game-choices');
+    let gameResults = document.querySelector('.game-results');
 
+    //querySelector returns null if no element exists; otherwise there is a truthy value
+    if(gameChoices && gameResults) {
+        gameChoices.remove();
+        gameResults.remove();
+    }
+}
 
 
 //collect information from the buttons
 const gameButtons = document.querySelectorAll('div.button-box button');
 
-//do thing for each button on click
 gameButtons.forEach((button) => {
 
     button.addEventListener('click', function(e) {
@@ -72,7 +102,9 @@ gameButtons.forEach((button) => {
         let cpuChoice = getComputerChoice();
         let playerChoice = e.target.className; //this value is a string
         let result = playRound(cpuChoice, playerChoice);
-        console.log(result);
+        
+        writeGameStatus(cpuChoice, playerChoice, result);
+
         
     });
 
