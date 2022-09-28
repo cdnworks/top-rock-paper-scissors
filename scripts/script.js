@@ -66,7 +66,14 @@ const gameButtons = document.querySelectorAll('div.button-box button');
 gameButtons.forEach((button) => {
 
     button.addEventListener('click', function(e) {
-        console.log(e.target);
+        //on click, generate a random computer choice
+        //collect the user input from the button's class
+        //play a game
+        let cpuChoice = getComputerChoice();
+        let playerChoice = e.target.className; //this value is a string
+        let result = playRound(cpuChoice, playerChoice);
+        console.log(result);
+        
     });
 
 });
